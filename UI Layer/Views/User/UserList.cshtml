@@ -1,0 +1,131 @@
+﻿@model List<UI_Layer.Models.User>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User List</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<style>
+		body {
+			padding-top: 56px; /* Adjust for fixed navbar */
+		}
+
+		.footer {
+			background-color: #f8f9fa;
+			padding: 20px;
+			text-align: center;
+		}
+
+		.navbar-brand {
+			font-weight: bold;
+		}
+	</style>
+	</head>
+	<body>
+	<div class="container mt-5">
+		<h3 class="mt-4 mb-4">All User List</h3>
+
+		<!-- Add New User Link -->
+		<div class="mb-4">
+			<a asp-route="RegisterUser" class="btn btn-primary">Add New User</a>
+		</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+		<div class="container">
+	<div class="collapse navbar-collapse" id="navbarNav">
+
+		<ul class="navbar-nav">
+	@* 		<li class="nav-item">
+				<a class="nav-link" asp-route="RecipeList">Recipe List</a>
+            </li>
+
+			<li class="nav-item">
+				<a class="nav-link" asp-route="RecipeStepList">Recipe Step List</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" asp-route="IngredientList">Ingredient List</a>
+			</li>
+            <li class="nav-item">
+				<a class="nav-link" asp-route="CommentList">Comment List</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" asp-route="RatingList">Rating List</a>
+			</li> *@
+						<li class="nav-item">
+							<a class="nav-link" asp-route="UserList">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-route="About">About Us</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-route="Contact">Contact Us</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-route="LogOut">Logout</a>
+						</li>
+			
+
+      </ul>
+</div>
+</div>
+</nav>
+</div>
+	<div class="container mt-5">
+	<table class="table table-striped table-bordered">
+		<thead class="thead-light">
+	<tr>
+		<th>User ID</th>
+		<th>User Name</th>
+		<th>Email Id</th>
+		<th>PassWord</th>
+
+		<th>Role</th>
+		<th>Date</th>
+		<th>Gender</th>
+		<th>Favorite Causines</th>
+		<th>Dietary Prefences</th>
+	</tr>
+	</thead>
+	<tbody>
+	@{
+		@if (Model != null && Model.Any())
+		{
+			foreach (var cx in Model)
+			{
+				<tr>
+					<td>@cx.UserId</td>
+					<td>@cx.Username</td>
+					<td>@cx.EmailId</td>
+					<td>@cx.Password</td>
+
+					<td>@cx.Role</td>
+					<td>@cx.Date</td>
+					<td>@cx.Gender</td>
+					<td>@cx.FavoriteCuisines</td>
+					<td>@cx.DietaryPreferences</td>
+
+							<td><a asp-route="GetByUserId" class="btn btn-sm btn-info" asp-route-id="@cx.UserId">Details</a> </td>
+							<td><a asp-route="DeleteUser" class="btn btn-sm btn-danger" asp-route-id="@cx.UserId">Delete</a> </td>
+							<td><a asp-route="EditUser" class="btn btn-sm btn-warning" asp-route-id="@cx.UserId">Edit</a> </td>
+				</tr>
+			}
+		}
+		else
+		{
+			<p>No User found</p>
+		}
+	}
+	</tbody>
+</table>
+</div>
+	<!-- Footer -->
+	<footer class="footer mt-5">
+		<div class="container">
+			<p>&copy; 2024 UserList Dashboard. All rights reserved.</p>
+		</div>
+	</footer>
+</body>
+</html>
